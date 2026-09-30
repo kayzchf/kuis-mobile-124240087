@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:latkuis_124240087/models/data.dart';
 import 'package:latkuis_124240087/root.dart';
-import 'package:latkuis_124240087/screens/home.dart';
 
 class LoginScreen extends StatefulWidget { //tampilan punya data berubah selama apk jalan
   const LoginScreen({super.key});
@@ -16,12 +16,19 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _isLoggedIn = false;
 
   void _login({required String username, required String password}) {
-    if (username == "kayneza" && password == "1720") {
-      setState(() { //update tampilan
-        _isLoggedIn = true;
-      });
+    final user = users.where( //cek username ke data.dart
+      (user) => 
+        user.username == username &&
+        user.password == password,
+    ).toList(); //ngirim 2 parameter
+
+    if(user.isNotEmpty){
+      final loggedInUsername = user[0].username; //cocokin index username
+
       Navigator.pushReplacement( //ketika login, tampilan ke replace
-        context, MaterialPageRoute(builder: (context) => Root()) //materialPageRoute = halaman tujuan
+        context, MaterialPageRoute(builder: (context) => Root(
+          username: loggedInUsername,
+        )) //materialPageRoute = halaman tujuan
       );
 
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(

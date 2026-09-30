@@ -3,7 +3,12 @@ import 'package:latkuis_124240087/screens/home.dart';
 import 'package:latkuis_124240087/screens/profile.dart';
 
 class Root extends StatefulWidget {
-  const new({super.key});
+  final String username;
+
+  const Root({
+    super.key,
+    required this.username
+  });
 
   @override
   State<Root> createState() => _RootState();
@@ -12,8 +17,17 @@ class Root extends StatefulWidget {
 class _RootState extends State<Root> {
   int _selectedIndex = 0; //index default yaitu index 0
 
-  List<Widget> screens = [HomeScreen(), ProfileScreen()];
+  late final List<Widget> screens; //nilainya nanti, karena username blm ada
   List<String> tittleScreens = ["Home", "Profile"];
+
+  @override
+  void initState(){ //dijalankan ketika rootstate dibuat
+    super.initState();
+    screens = [
+      HomeScreen(),
+      ProfileScreen(username: widget.username) //baru nangkep usernamenya
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
