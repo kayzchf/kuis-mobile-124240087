@@ -3,7 +3,7 @@ import 'package:latkuis_124240087/models/data.dart';
 import 'package:latkuis_124240087/screens/detail.dart';
 
 class HomeScreen extends StatelessWidget {
-  const new({super.key});
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
